@@ -10,7 +10,7 @@ export const getDoctorByUsername = (username: string) => {
 };
 
 export const getAllDoctors = () => {
-  return doctorAxios.get("/doctors");
+  return doctorAxios.get("/");
 };
 
 export const updateDoctorProfileDetails = (

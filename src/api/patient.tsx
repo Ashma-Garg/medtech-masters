@@ -9,7 +9,7 @@ export const getPatientByUsername = (username: string) => {
 };
 
 export const getAllPatients = () => {
-  return patientAxios.get("/patient");
+  return patientAxios.get("/");
 };
 
 export const updateProfileDetails = (

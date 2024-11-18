@@ -11,8 +11,9 @@ import { SignUp } from "../pages/SignUp";
 import { IRoutesPath } from "./interface";
 import { DigicareProfile } from "../pages/Profile";
 import { CallingRoom } from "../pages/CallingRoom";
-// import { BookAppointemnt } from "../pages/BookAppointment";
-// import { AddSchedule } from "../pages/AddSchedule";
+import { AddSchedule } from "../pages/AddSchedule";
+import { AppointmentList } from "../pages/AppointmentList";
+import { BookAppointemnt } from "../pages/BookAppointment";
 
 export const routesName = {
   signin: "/signin",
@@ -83,30 +84,30 @@ export const RoutesList: IRoutesPath[] = [
     component: <DoctorHistory />,
     valid_role: [EUserRole.patient],
   },
-  // {
-  //   name: "drawer.drawerLink.bookAppointment",
-  //   link: routesName.bookAppointment,
-  //   id: "bookAppointment",
-  //   renderDrawerComponents: true,
-  //   component: <BookAppointemnt />,
-  //   valid_role: [EUserRole.patient],
-  // },
-  // {
-  //   name: "drawer.drawerLink.appointmentList",
-  //   link: routesName.appointmentList,
-  //   id: "appointmentList",
-  //   renderDrawerComponents: true,
-  //   component: <AppointmentList />,
-  //   valid_role: [EUserRole.doctor, EUserRole.patient],
-  // },
-  // {
-  //   name: "drawer.drawerLink.addSchedule",
-  //   link: routesName.addSchedule,
-  //   id: "addSchedule",
-  //   renderDrawerComponents: true,
-  //   component: <AddSchedule />,
-  //   valid_role: [EUserRole.doctor],
-  // },
+  {
+    name: "drawer.drawerLink.bookAppointment",
+    link: routesName.bookAppointment,
+    id: "bookAppointment",
+    renderDrawerComponents: true,
+    component: <BookAppointemnt />,
+    valid_role: [EUserRole.patient],
+  },
+  {
+    name: "drawer.drawerLink.appointmentList",
+    link: routesName.appointmentList,
+    id: "appointmentList",
+    renderDrawerComponents: true,
+    component: <AppointmentList />,
+    valid_role: [EUserRole.doctor, EUserRole.patient],
+  },
+  {
+    name: "drawer.drawerLink.addSchedule",
+    link: routesName.addSchedule,
+    id: "addSchedule",
+    renderDrawerComponents: true,
+    component: <AddSchedule />,
+    valid_role: [EUserRole.doctor],
+  },
   {
     name: "drawer.drawerLink.profile",
     link: routesName.profile,

@@ -6,7 +6,7 @@ import { IDoctorHistory } from "../modules/doctorHistory/interface";
 import { DoctorSignUpApiProps } from "./interface";
 
 export const getDoctorByUsername = (username: string) => {
-  return doctorAxios.get(`/doctor/${username}`);
+  return doctorAxios.get(`/${username}`);
 };
 
 export const getAllDoctors = () => {

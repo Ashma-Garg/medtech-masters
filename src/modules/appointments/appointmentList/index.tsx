@@ -124,16 +124,16 @@ export const MAppointmentList = () => {
 
         const UdoctorInfoPromises = u?.map(async (a) => {
           return user?.role === EUserRole.patient
-            ? await getDoctorInformation(a.doctor_username)
-            : await getPatientInformation(a.patient_username);
+            ? await getDoctorInformation(a.doctor)
+            : await getPatientInformation(a.patient);
         });
         const UdoctorInfoResults = await Promise.all(UdoctorInfoPromises);
         setULinkedUserInfo(UdoctorInfoResults);
 
         const PdoctorInfoPromises = p?.map(async (a) => {
           return user?.role === EUserRole.patient
-            ? await getDoctorInformation(a.doctor_username)
-            : await getPatientInformation(a.patient_username);
+            ? await getDoctorInformation(a.doctor)
+            : await getPatientInformation(a.patient);
         });
         const PdoctorInfoResults = await Promise.all(PdoctorInfoPromises);
         setPLinkedUserInfo(PdoctorInfoResults);

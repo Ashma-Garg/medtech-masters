@@ -21,9 +21,11 @@ import { ContextProps } from "../../../context/interface";
 import { IPatient } from "../../avatarPopOverContent/interface";
 import { getDoctorByUsername } from "../../../api/doctor";
 import {
-  getAllTimeSlotsForDoctor,
   makeAnAppointment,
 } from "../../../api/patient";
+import {
+  getAllTimeSlotsForDoctor
+} from "../../../api/doctor";
 import { IAPIMessage, IMakeAnAppointmentAPI } from "../../../api/interface";
 import { DigicareSnackbar } from "../../common/components/DigiSnackbar";
 import dayjs from "dayjs";
@@ -41,7 +43,7 @@ export const MBookAPpointment = () => {
 
   useMemo(() => {
     setPatientRecord([]);
-    (user as IPatient).doctors.forEach((doctorUsername) => {
+    (user as IPatient).doctors?.forEach((doctorUsername) => {
       getDoctorByUsername(doctorUsername).then((res) => {
         const patientRecordClone = patientRecord.slice();
         patientRecordClone.push(res.data.data);
@@ -140,7 +142,7 @@ export const MBookAPpointment = () => {
     event.preventDefault();
     if (selectedDoctor && appointmentDate && selectedTime && selectedHospital) {
       const appointmentDetails: IMakeAnAppointmentAPI = {
-        date: appointmentDate.toString(),
+        date: appointmentDate.toISOString().split('T')[0],
         doctor_username: selectedDoctor,
         day: medmastersConfig.days[appointmentDate?.getDay()]?.value,
         time: selectedTime,

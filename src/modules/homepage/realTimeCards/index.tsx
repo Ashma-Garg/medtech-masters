@@ -16,7 +16,10 @@ import {
 } from "../../common/components/DigicareAccordian";
 import { MedMastersIcons } from "../../../assets/icon";
 import { MedMastersIconEnum } from "../../../assets/icon/interface";
-import { getLatestRealTimeData } from "../../../api/patient";
+import {
+  getLatestRealTimeData,
+  getPatientByUsername,
+} from "../../../api/patient";
 import { medmastersConfig } from "../../../assets/constants/config";
 import { IDoctorHistory } from "../../doctorHistory/interface";
 import { motion } from "framer-motion";
@@ -60,15 +63,20 @@ export const RealTimeCards = () => {
       setRealData([]);
       let realDataDummy = [];
       (user as IDoctorHistory).patients?.forEach((p) => {
-        getLatestRealTimeData(p)
-          .then((res) => {
-            if (res.data.data) realDataDummy.push(res.data.data);
-            else
-              realDataDummy.push({ patient_username: p } as RealTimeDataProps);
-          })
-          .catch((e) => {
-            realDataDummy.push({ patient_username: p });
-          });
+        getPatientByUsername(p).then((res) => {
+          const patient = res.data.data;
+          getLatestRealTimeData(patient.user_name)
+            .then((res) => {
+              if (res.data.data) realDataDummy.push(res.data.data);
+              else
+                realDataDummy.push({
+                  patient_username: p,
+                } as RealTimeDataProps);
+            })
+            .catch((e) => {
+              realDataDummy.push({ patient_username: p });
+            });
+        });
       });
       setTimeout(() => {
         setRealData(realDataDummy);
@@ -93,7 +101,8 @@ export const RealTimeCards = () => {
     realTimePatientId: string
   ) => {
     if (data.reading) {
-      const dataMinMax = data.reading.split("/");
+      // console.log(typeof data.reading)
+      const dataMinMax = data.reading.toString().split("/");
       if (dataMinMax.length === 1) {
         if (
           Number(dataMinMax) >= Number(data.min_value) &&

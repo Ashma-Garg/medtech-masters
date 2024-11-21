@@ -1,6 +1,6 @@
 export interface IBookAppointment {
   id: string;
-  doctor_username: string;
+  doctor: string;
   online_availability?: IDoctorOnlineAvailability;
   appointments?: IAppointmnets[];
 }
@@ -29,8 +29,8 @@ export interface IAppointmnets {
   id: string;
   date: Date;
   description: string;
-  patient_username?: string;
-  doctor_username?: string;
+  patient?: string;
+  doctor?: string;
   room_id: string;
 }
 

@@ -21,3 +21,10 @@ export const doctorAxios = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const appointmentAxios = axios.create({
+  baseURL: `${process.env.REACT_APP_BACKEND_HOST}/appointmentdata`,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
